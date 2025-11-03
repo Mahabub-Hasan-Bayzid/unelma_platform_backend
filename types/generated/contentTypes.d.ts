@@ -430,6 +430,57 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
+  collectionName: 'case_studies';
+  info: {
+    displayName: 'Case Study';
+    pluralName: 'case-studies';
+    singularName: 'case-study';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    budget: Schema.Attribute.Decimal;
+    caseid: Schema.Attribute.UID<'projectName'>;
+    category: Schema.Attribute.Enumeration<
+      [
+        'web-development',
+        'website-design',
+        'mobile-development',
+        'cybersecurity',
+        'other',
+      ]
+    >;
+    client: Schema.Attribute.String & Schema.Attribute.DefaultTo<'undisclosed'>;
+    completedDate: Schema.Attribute.Date;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    duration: Schema.Attribute.String & Schema.Attribute.DefaultTo<'_month'>;
+    Gallery: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::case-study.case-study'
+    > &
+      Schema.Attribute.Private;
+    overview: Schema.Attribute.Blocks;
+    projectName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'name'>;
+    publishedAt: Schema.Attribute.DateTime;
+    result: Schema.Attribute.Blocks;
+    topImage: Schema.Attribute.Media<'images' | 'files', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPostPost extends Struct.CollectionTypeSchema {
   collectionName: 'posts';
   info: {
@@ -971,6 +1022,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::case-study.case-study': ApiCaseStudyCaseStudy;
       'api::post.post': ApiPostPost;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

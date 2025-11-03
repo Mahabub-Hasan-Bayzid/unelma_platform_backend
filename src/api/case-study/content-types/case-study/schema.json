@@ -1,0 +1,73 @@
+{
+  "kind": "collectionType",
+  "collectionName": "case_studies",
+  "info": {
+    "singularName": "case-study",
+    "pluralName": "case-studies",
+    "displayName": "Case Study"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "web-development",
+        "website-design",
+        "mobile-development",
+        "cybersecurity",
+        "other"
+      ]
+    },
+    "topImage": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "projectName": {
+      "type": "string",
+      "default": "name",
+      "required": true
+    },
+    "overview": {
+      "type": "blocks"
+    },
+    "result": {
+      "type": "blocks"
+    },
+    "client": {
+      "type": "string",
+      "default": "undisclosed"
+    },
+    "budget": {
+      "type": "decimal"
+    },
+    "duration": {
+      "type": "string",
+      "default": "_month"
+    },
+    "Gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "completedDate": {
+      "type": "date"
+    },
+    "caseid": {
+      "type": "uid",
+      "targetField": "projectName",
+      "regex": "case_1"
+    }
+  }
+}

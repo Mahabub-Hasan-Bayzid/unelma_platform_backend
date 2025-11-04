@@ -64,10 +64,10 @@
     "completedDate": {
       "type": "date"
     },
-    "caseid": {
+    "case_id": {
       "type": "uid",
       "targetField": "projectName",
-      "regex": "case_1"
+      "required": true
     }
   }
 }

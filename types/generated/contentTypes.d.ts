@@ -442,7 +442,7 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
   };
   attributes: {
     budget: Schema.Attribute.Decimal;
-    caseid: Schema.Attribute.UID<'projectName'>;
+    case_id: Schema.Attribute.UID<'projectName'> & Schema.Attribute.Required;
     category: Schema.Attribute.Enumeration<
       [
         'web-development',
@@ -475,6 +475,46 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     result: Schema.Attribute.Blocks;
     topImage: Schema.Attribute.Media<'images' | 'files', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHeroSpotHeroSpot extends Struct.CollectionTypeSchema {
+  collectionName: 'hero_spots';
+  info: {
+    displayName: 'HeroSpot';
+    pluralName: 'hero-spots';
+    singularName: 'hero-spot';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    backgroundMedia: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    backgroundMusic: Schema.Attribute.Media<
+      'files' | 'audios' | 'videos',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::hero-spot.hero-spot'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images' | 'files', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    slogan: Schema.Attribute.Blocks;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Unelma'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1023,6 +1063,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
+      'api::hero-spot.hero-spot': ApiHeroSpotHeroSpot;
       'api::post.post': ApiPostPost;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

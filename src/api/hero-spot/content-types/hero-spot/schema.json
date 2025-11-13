@@ -47,6 +47,10 @@
         "images",
         "files"
       ]
+    },
+    "ourProduct": {
+      "type": "text",
+      "default": "Our product "
     }
   }
 }

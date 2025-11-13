@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "customer_foodbacks",
+  "info": {
+    "singularName": "customer-foodback",
+    "pluralName": "customer-foodbacks",
+    "displayName": "customerFeedbacks"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Picture": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "Stockholde": {
+      "type": "string"
+    },
+    "Review": {
+      "type": "text"
+    }
+  }
+}

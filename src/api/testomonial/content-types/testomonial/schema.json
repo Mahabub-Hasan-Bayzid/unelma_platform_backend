@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "testomonials",
+  "info": {
+    "singularName": "testomonial",
+    "pluralName": "testomonials",
+    "displayName": "testomonial"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Picture": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "stockholder": {
+      "type": "enumeration",
+      "enum": [
+        "customer",
+        "partner"
+      ]
+    }
+  }
+}

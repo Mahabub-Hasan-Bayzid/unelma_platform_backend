@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_about_strength_items",
+  "info": {
+    "displayName": "Strength Item"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "percentage": {
+      "type": "integer",
+      "min": 10,
+      "max": 100
+    }
+  },
+  "config": {}
+}

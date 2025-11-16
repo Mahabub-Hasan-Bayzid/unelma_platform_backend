@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "About"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slogan": {
+      "type": "string"
+    },
+    "mission": {
+      "type": "text"
+    },
+    "vision": {
+      "type": "text"
+    },
+    "detailStory": {
+      "type": "blocks"
+    },
+    "ourStrength": {
+      "type": "component",
+      "component": "about.strength-item",
+      "repeatable": true
+    },
+    "users": {
+      "type": "component",
+      "component": "about.our-growth",
+      "repeatable": true
+    },
+    "aboutImage": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "highlightedpoints": {
+      "type": "blocks"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "statment": {
+      "type": "string"
+    }
+  }
+}

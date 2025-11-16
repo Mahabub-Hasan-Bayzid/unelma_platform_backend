@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_about_our_growths",
+  "info": {
+    "displayName": "ourGrowth"
+  },
+  "options": {},
+  "attributes": {
+    "year": {
+      "type": "string"
+    },
+    "usernumber": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}

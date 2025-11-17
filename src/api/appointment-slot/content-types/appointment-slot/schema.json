@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "appointment_slots",
+  "info": {
+    "singularName": "appointment-slot",
+    "pluralName": "appointment-slots",
+    "displayName": "appointment-slot"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date": {
+      "type": "datetime"
+    },
+    "booked": {
+      "type": "boolean"
+    },
+    "appointments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::appointment.appointment",
+      "mappedBy": "appointment_slot"
+    }
+  }
+}

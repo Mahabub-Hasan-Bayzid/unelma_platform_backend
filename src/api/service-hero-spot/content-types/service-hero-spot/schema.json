@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "service_hero_spots",
+  "info": {
+    "singularName": "service-hero-spot",
+    "pluralName": "service-hero-spots",
+    "displayName": "ServiceHeroSpot"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "buttonLink": {
+      "type": "string"
+    }
+  }
+}

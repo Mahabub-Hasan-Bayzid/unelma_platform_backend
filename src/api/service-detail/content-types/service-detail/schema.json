@@ -20,9 +20,6 @@
     "body": {
       "type": "text"
     },
-    "category": {
-      "type": "text"
-    },
     "image": {
       "type": "media",
       "multiple": true,
@@ -31,6 +28,15 @@
         "files",
         "videos",
         "audios"
+      ]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Mobile Apps",
+        "UX/UI Design",
+        "Web Developer",
+        "Web Design"
       ]
     }
   }

@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "orders"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "userName": {
+      "type": "string"
+    },
+    "userEmail": {
+      "type": "email"
+    },
+    "serviceName": {
+      "type": "string"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "invoiceNumber": {
+      "type": "uid"
+    },
+    "orderstatus": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "paid"
+      ]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Mobile Apps",
+        "UX/UI Design",
+        "Web Developer",
+        "Web Design"
+      ]
+    },
+    "plan": {
+      "type": "enumeration",
+      "enum": [
+        "Business",
+        "Professional"
+      ]
+    }
+  }
+}

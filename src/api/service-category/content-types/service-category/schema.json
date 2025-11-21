@@ -30,7 +30,29 @@
         "audios"
       ]
     },
-    "oreder": {
+    "order": {
+      "type": "integer"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Mobile Apps",
+        "UX/UI Design",
+        "Web Developer",
+        "Web Design"
+      ]
+    },
+    "plan": {
+      "type": "enumeration",
+      "enum": [
+        "Business",
+        "Professional"
+      ]
+    },
+    "priceBusiness": {
+      "type": "integer"
+    },
+    "priceProfessional": {
       "type": "integer"
     }
   }

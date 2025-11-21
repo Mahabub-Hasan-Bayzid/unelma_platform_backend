@@ -471,6 +471,77 @@ export interface ApiAboutAbout extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAppointmentHeroAppointmentHero
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'appointment_heroes';
+  info: {
+    displayName: 'AppointmentHero';
+    pluralName: 'appointment-heroes';
+    singularName: 'appointment-hero';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    AppointmentHeroImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::appointment-hero.appointment-hero'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiAppointmentAppointment extends Struct.CollectionTypeSchema {
+  collectionName: 'appointments';
+  info: {
+    displayName: 'Appointment';
+    pluralName: 'appointments';
+    singularName: 'appointment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    email: Schema.Attribute.Email;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::appointment.appointment'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    time: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   collectionName: 'blogs';
   info: {
@@ -587,6 +658,39 @@ export interface ApiCustomerFoodbackCustomerFoodback
   };
 }
 
+export interface ApiDashboardHeroDashboardHero
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'dashboard_heroes';
+  info: {
+    displayName: 'DashboardHero';
+    pluralName: 'dashboard-heroes';
+    singularName: 'dashboard-hero';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::dashboard-hero.dashboard-hero'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHeroSpotHeroSpot extends Struct.CollectionTypeSchema {
   collectionName: 'hero_spots';
   info: {
@@ -695,6 +799,40 @@ export interface ApiInvoiceInvoice extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
+  collectionName: 'orders';
+  info: {
+    displayName: 'orders';
+    pluralName: 'orders';
+    singularName: 'order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<
+      ['Mobile Apps', 'UX/UI Design', 'Web Developer', 'Web Design']
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    invoiceNumber: Schema.Attribute.UID;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
+      Schema.Attribute.Private;
+    orderstatus: Schema.Attribute.Enumeration<['pending', 'paid']>;
+    plan: Schema.Attribute.Enumeration<['Business', 'Professional']>;
+    price: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    serviceName: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userEmail: Schema.Attribute.Email;
+    userName: Schema.Attribute.String;
   };
 }
 
@@ -849,6 +987,9 @@ export interface ApiServiceCategoryServiceCategory
     draftAndPublish: true;
   };
   attributes: {
+    category: Schema.Attribute.Enumeration<
+      ['Mobile Apps', 'UX/UI Design', 'Web Developer', 'Web Design']
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -864,7 +1005,10 @@ export interface ApiServiceCategoryServiceCategory
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
-    oreder: Schema.Attribute.Integer;
+    order: Schema.Attribute.Integer;
+    plan: Schema.Attribute.Enumeration<['Business', 'Professional']>;
+    priceBusiness: Schema.Attribute.Integer;
+    priceProfessional: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID;
     updatedAt: Schema.Attribute.DateTime;
@@ -886,7 +1030,9 @@ export interface ApiServiceDetailServiceDetail
   };
   attributes: {
     body: Schema.Attribute.Text;
-    category: Schema.Attribute.Text;
+    category: Schema.Attribute.Enumeration<
+      ['Mobile Apps', 'UX/UI Design', 'Web Developer', 'Web Design']
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -903,6 +1049,41 @@ export interface ApiServiceDetailServiceDetail
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID;
     title: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiServiceHeroSpotServiceHeroSpot
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'service_hero_spots';
+  info: {
+    displayName: 'ServiceHeroSpot';
+    pluralName: 'service-hero-spots';
+    singularName: 'service-hero-spot';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    buttonLink: Schema.Attribute.String;
+    buttonText: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service-hero-spot.service-hero-spot'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1453,18 +1634,23 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::appointment-hero.appointment-hero': ApiAppointmentHeroAppointmentHero;
+      'api::appointment.appointment': ApiAppointmentAppointment;
       'api::blog.blog': ApiBlogBlog;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
       'api::customer-foodback.customer-foodback': ApiCustomerFoodbackCustomerFoodback;
+      'api::dashboard-hero.dashboard-hero': ApiDashboardHeroDashboardHero;
       'api::hero-spot.hero-spot': ApiHeroSpotHeroSpot;
       'api::inquiry.inquiry': ApiInquiryInquiry;
       'api::invoice.invoice': ApiInvoiceInvoice;
+      'api::order.order': ApiOrderOrder;
       'api::post.post': ApiPostPost;
       'api::product.product': ApiProductProduct;
       'api::querie.querie': ApiQuerieQuerie;
       'api::review.review': ApiReviewReview;
       'api::service-category.service-category': ApiServiceCategoryServiceCategory;
       'api::service-detail.service-detail': ApiServiceDetailServiceDetail;
+      'api::service-hero-spot.service-hero-spot': ApiServiceHeroSpotServiceHeroSpot;
       'api::testomonial.testomonial': ApiTestomonialTestomonial;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

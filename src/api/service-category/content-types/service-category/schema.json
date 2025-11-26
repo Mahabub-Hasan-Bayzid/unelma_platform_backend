@@ -17,9 +17,6 @@
     "description": {
       "type": "text"
     },
-    "slug": {
-      "type": "uid"
-    },
     "imageIcon": {
       "type": "media",
       "multiple": true,
@@ -32,6 +29,22 @@
     },
     "oreder": {
       "type": "integer"
+    },
+    "category": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "serviceicon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

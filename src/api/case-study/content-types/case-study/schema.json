@@ -68,6 +68,11 @@
       "type": "uid",
       "targetField": "projectName",
       "required": true
+    },
+    "caseicon": {
+      "type": "component",
+      "component": "case.icon",
+      "repeatable": true
     }
   }
 }

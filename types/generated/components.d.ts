@@ -29,11 +29,27 @@ export interface AboutStrengthItem extends Struct.ComponentSchema {
   };
 }
 
+export interface CaseIcon extends Struct.ComponentSchema {
+  collectionName: 'components_case_icons';
+  info: {
+    displayName: 'icon';
+  };
+  attributes: {
+    budget: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Completdate: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    customer: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    duration: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'about.our-growth': AboutOurGrowth;
       'about.strength-item': AboutStrengthItem;
+      'case.icon': CaseIcon;
     }
   }
 }

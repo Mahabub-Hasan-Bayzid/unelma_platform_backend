@@ -16,7 +16,8 @@
       "required": true
     },
     "subject": {
-      "type": "string"
+      "type": "string",
+      "default": "inquiries"
     },
     "email": {
       "type": "email",
@@ -24,6 +25,7 @@
     },
     "message": {
       "type": "text",
+      "minLength": 1,
       "required": true
     },
     "file": {
@@ -36,11 +38,11 @@
         "audios"
       ]
     },
-    "user": {
+    "User": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "inquiries"
+      "inversedBy": "Inquiry"
     }
   }
 }

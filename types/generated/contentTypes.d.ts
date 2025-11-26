@@ -517,6 +517,7 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
   attributes: {
     budget: Schema.Attribute.Decimal;
     case_id: Schema.Attribute.UID<'projectName'> & Schema.Attribute.Required;
+    caseicon: Schema.Attribute.Component<'case.icon', true>;
     category: Schema.Attribute.Enumeration<
       [
         'web-development',
@@ -654,14 +655,18 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
       'api::inquiry.inquiry'
     > &
       Schema.Attribute.Private;
-    message: Schema.Attribute.Text & Schema.Attribute.Required;
+    message: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    subject: Schema.Attribute.String;
+    subject: Schema.Attribute.String & Schema.Attribute.DefaultTo<'inquiries'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<
+    User: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;
@@ -692,6 +697,79 @@ export interface ApiInvoiceInvoice extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     total: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
+  collectionName: 'orders';
+  info: {
+    displayName: 'order';
+    pluralName: 'orders';
+    singularName: 'order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    customer: Schema.Attribute.JSON;
+    delivery_date: Schema.Attribute.Date;
+    delivery_notes: Schema.Attribute.String;
+    discount_amount: Schema.Attribute.Integer;
+    items: Schema.Attribute.JSON;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
+      Schema.Attribute.Private;
+    metadata: Schema.Attribute.JSON;
+    order_status: Schema.Attribute.Enumeration<
+      ['pending', 'confirmed', 'shipped', 'cancelled']
+    >;
+    payment_method: Schema.Attribute.Enumeration<
+      ['card', 'cash', 'banktransfer']
+    >;
+    placed_at: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    special_instructions: Schema.Attribute.Blocks;
+    total: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
+export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
+  collectionName: 'partners';
+  info: {
+    displayName: 'partner';
+    pluralName: 'partners';
+    singularName: 'partner';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::partner.partner'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -849,6 +927,7 @@ export interface ApiServiceCategoryServiceCategory
     draftAndPublish: true;
   };
   attributes: {
+    category: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -866,6 +945,9 @@ export interface ApiServiceCategoryServiceCategory
     name: Schema.Attribute.String;
     oreder: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    serviceicon: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     slug: Schema.Attribute.UID;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1410,13 +1492,14 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    inquiries: Schema.Attribute.Relation<'oneToMany', 'api::inquiry.inquiry'>;
+    Inquiry: Schema.Attribute.Relation<'oneToMany', 'api::inquiry.inquiry'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    orders: Schema.Attribute.Relation<'oneToMany', 'api::order.order'>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1459,6 +1542,8 @@ declare module '@strapi/strapi' {
       'api::hero-spot.hero-spot': ApiHeroSpotHeroSpot;
       'api::inquiry.inquiry': ApiInquiryInquiry;
       'api::invoice.invoice': ApiInvoiceInvoice;
+      'api::order.order': ApiOrderOrder;
+      'api::partner.partner': ApiPartnerPartner;
       'api::post.post': ApiPostPost;
       'api::product.product': ApiProductProduct;
       'api::querie.querie': ApiQuerieQuerie;

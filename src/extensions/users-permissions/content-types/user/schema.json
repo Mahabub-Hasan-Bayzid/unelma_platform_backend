@@ -66,10 +66,16 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "inquiries": {
+    "Inquiry": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::inquiry.inquiry",
+      "mappedBy": "User"
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order.order",
       "mappedBy": "user"
     }
   }

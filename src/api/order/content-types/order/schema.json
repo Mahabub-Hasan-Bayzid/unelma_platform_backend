@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "order"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "items": {
+      "type": "json"
+    },
+    "total": {
+      "type": "integer"
+    },
+    "customer": {
+      "type": "json"
+    },
+    "order_status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "confirmed",
+        "shipped",
+        "cancelled"
+      ]
+    },
+    "placed_at": {
+      "type": "datetime"
+    },
+    "delivery_notes": {
+      "type": "string"
+    },
+    "special_instructions": {
+      "type": "blocks"
+    },
+    "discount_amount": {
+      "type": "integer"
+    },
+    "metadata": {
+      "type": "json"
+    },
+    "payment_method": {
+      "type": "enumeration",
+      "enum": [
+        "card",
+        "cash",
+        "banktransfer"
+      ]
+    },
+    "delivery_date": {
+      "type": "date"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
+    }
+  }
+}

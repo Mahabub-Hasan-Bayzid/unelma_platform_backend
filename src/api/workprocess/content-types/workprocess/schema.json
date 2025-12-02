@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "workprocesses",
+  "info": {
+    "singularName": "workprocess",
+    "pluralName": "workprocesses",
+    "displayName": "workprocess"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "processName": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "detail": {
+      "type": "text"
+    },
+    "sraticicon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "processno": {
+      "type": "integer",
+      "required": true,
+      "unique": true
+    }
+  }
+}

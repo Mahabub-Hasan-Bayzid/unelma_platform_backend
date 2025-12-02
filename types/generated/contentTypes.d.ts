@@ -1024,6 +1024,42 @@ export interface ApiTestomonialTestomonial extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiWorkprocessWorkprocess extends Struct.CollectionTypeSchema {
+  collectionName: 'workprocesses';
+  info: {
+    displayName: 'workprocess';
+    pluralName: 'workprocesses';
+    singularName: 'workprocess';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    detail: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::workprocess.workprocess'
+    > &
+      Schema.Attribute.Private;
+    processName: Schema.Attribute.String;
+    processno: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    sraticicon: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1551,6 +1587,7 @@ declare module '@strapi/strapi' {
       'api::service-category.service-category': ApiServiceCategoryServiceCategory;
       'api::service-detail.service-detail': ApiServiceDetailServiceDetail;
       'api::testomonial.testomonial': ApiTestomonialTestomonial;
+      'api::workprocess.workprocess': ApiWorkprocessWorkprocess;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

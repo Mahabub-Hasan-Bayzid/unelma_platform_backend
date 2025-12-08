@@ -33,6 +33,9 @@
     },
     "message": {
       "type": "string"
+    },
+    "appointmentType": {
+      "type": "string"
     }
   }
 }

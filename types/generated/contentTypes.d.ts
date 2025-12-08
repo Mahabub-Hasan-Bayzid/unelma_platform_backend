@@ -471,6 +471,78 @@ export interface ApiAboutAbout extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAppointmentHeroAppointmentHero
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'appointment_heroes';
+  info: {
+    displayName: 'AppointmentHero';
+    pluralName: 'appointment-heroes';
+    singularName: 'appointment-hero';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    AppointmentHeroImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::appointment-hero.appointment-hero'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiAppointmentAppointment extends Struct.CollectionTypeSchema {
+  collectionName: 'appointments';
+  info: {
+    displayName: 'Appointment';
+    pluralName: 'appointments';
+    singularName: 'appointment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    appointmentType: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    email: Schema.Attribute.Email;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::appointment.appointment'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    time: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   collectionName: 'blogs';
   info: {
@@ -517,7 +589,6 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
   attributes: {
     budget: Schema.Attribute.Decimal;
     case_id: Schema.Attribute.UID<'projectName'> & Schema.Attribute.Required;
-    caseicon: Schema.Attribute.Component<'case.icon', true>;
     category: Schema.Attribute.Enumeration<
       [
         'web-development',
@@ -556,6 +627,36 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiContactHeroContactHero extends Struct.CollectionTypeSchema {
+  collectionName: 'contact_heroes';
+  info: {
+    displayName: 'contactHero';
+    pluralName: 'contact-heroes';
+    singularName: 'contact-hero';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact-hero.contact-hero'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCustomerFoodbackCustomerFoodback
   extends Struct.CollectionTypeSchema {
   collectionName: 'customer_foodbacks';
@@ -582,6 +683,39 @@ export interface ApiCustomerFoodbackCustomerFoodback
     publishedAt: Schema.Attribute.DateTime;
     Review: Schema.Attribute.Text;
     Stockholde: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiDashboardHeroDashboardHero
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'dashboard_heroes';
+  info: {
+    displayName: 'DashboardHero';
+    pluralName: 'dashboard-heroes';
+    singularName: 'dashboard-hero';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::dashboard-hero.dashboard-hero'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -655,18 +789,14 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
       'api::inquiry.inquiry'
     > &
       Schema.Attribute.Private;
-    message: Schema.Attribute.Text &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }>;
+    message: Schema.Attribute.Text & Schema.Attribute.Required;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    subject: Schema.Attribute.String & Schema.Attribute.DefaultTo<'inquiries'>;
+    subject: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    User: Schema.Attribute.Relation<
+    user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;
@@ -703,10 +833,41 @@ export interface ApiInvoiceInvoice extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMessageMessage extends Struct.CollectionTypeSchema {
+  collectionName: 'messages';
+  info: {
+    displayName: 'Message';
+    pluralName: 'messages';
+    singularName: 'message';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::message.message'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.Text;
+    name: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   collectionName: 'orders';
   info: {
-    displayName: 'order';
+    displayName: 'orders';
     pluralName: 'orders';
     singularName: 'order';
   };
@@ -714,65 +875,26 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    category: Schema.Attribute.Enumeration<
+      ['Mobile Apps', 'UX/UI Design', 'Web Developer', 'Web Design']
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    customer: Schema.Attribute.JSON;
-    delivery_date: Schema.Attribute.Date;
-    delivery_notes: Schema.Attribute.String;
-    discount_amount: Schema.Attribute.Integer;
-    items: Schema.Attribute.JSON;
+    invoiceNumber: Schema.Attribute.UID;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
-    metadata: Schema.Attribute.JSON;
-    order_status: Schema.Attribute.Enumeration<
-      ['pending', 'confirmed', 'shipped', 'cancelled']
-    >;
-    payment_method: Schema.Attribute.Enumeration<
-      ['card', 'cash', 'banktransfer']
-    >;
-    placed_at: Schema.Attribute.DateTime;
+    orderstatus: Schema.Attribute.Enumeration<['pending', 'paid']>;
+    plan: Schema.Attribute.Enumeration<['Business', 'Professional']>;
+    price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
-    special_instructions: Schema.Attribute.Blocks;
-    total: Schema.Attribute.Integer;
+    serviceName: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-  };
-}
-
-export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
-  collectionName: 'partners';
-  info: {
-    displayName: 'partner';
-    pluralName: 'partners';
-    singularName: 'partner';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    link: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::partner.partner'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
+    userEmail: Schema.Attribute.Email;
+    userName: Schema.Attribute.String;
   };
 }
 
@@ -825,7 +947,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.String;
     detail: Schema.Attribute.Blocks;
     images: Schema.Attribute.Media<'images' | 'files', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -915,35 +1037,6 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiScrollingTextScrollingText
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'scrolling_texts';
-  info: {
-    displayName: 'ScrollingText';
-    pluralName: 'scrolling-texts';
-    singularName: 'scrolling-text';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::scrolling-text.scrolling-text'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    text: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiServiceCategoryServiceCategory
   extends Struct.CollectionTypeSchema {
   collectionName: 'service_categories';
@@ -956,7 +1049,9 @@ export interface ApiServiceCategoryServiceCategory
     draftAndPublish: true;
   };
   attributes: {
-    category: Schema.Attribute.String;
+    category: Schema.Attribute.Enumeration<
+      ['Mobile Apps', 'UX/UI Design', 'Web Developer', 'Web Design']
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -972,11 +1067,11 @@ export interface ApiServiceCategoryServiceCategory
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
-    oreder: Schema.Attribute.Integer;
+    order: Schema.Attribute.Integer;
+    plan: Schema.Attribute.Enumeration<['Business', 'Professional']>;
+    priceBusiness: Schema.Attribute.Integer;
+    priceProfessional: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
-    serviceicon: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
     slug: Schema.Attribute.UID;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -997,7 +1092,9 @@ export interface ApiServiceDetailServiceDetail
   };
   attributes: {
     body: Schema.Attribute.Text;
-    category: Schema.Attribute.Text;
+    category: Schema.Attribute.Enumeration<
+      ['Mobile Apps', 'UX/UI Design', 'Web Developer', 'Web Design']
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1014,6 +1111,41 @@ export interface ApiServiceDetailServiceDetail
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID;
     title: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiServiceHeroSpotServiceHeroSpot
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'service_hero_spots';
+  info: {
+    displayName: 'ServiceHeroSpot';
+    pluralName: 'service-hero-spots';
+    singularName: 'service-hero-spot';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    buttonLink: Schema.Attribute.String;
+    buttonText: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service-hero-spot.service-hero-spot'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1047,79 +1179,6 @@ export interface ApiTestomonialTestomonial extends Struct.CollectionTypeSchema {
     >;
     publishedAt: Schema.Attribute.DateTime;
     stockholder: Schema.Attribute.Enumeration<['customer', 'partner']>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiThemeTheme extends Struct.CollectionTypeSchema {
-  collectionName: 'themes';
-  info: {
-    displayName: 'theme';
-    pluralName: 'themes';
-    singularName: 'theme';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    backgroundcolor: Schema.Attribute.String;
-    bordershad: Schema.Attribute.String;
-    card1: Schema.Attribute.String;
-    card2: Schema.Attribute.String;
-    card3: Schema.Attribute.String;
-    componentBackcolor1: Schema.Attribute.String;
-    componentBackcolor2: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    fontcolor1: Schema.Attribute.String;
-    fontcolor2: Schema.Attribute.String;
-    heroBackImage: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    hubarColor1: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::theme.theme'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiWorkprocessWorkprocess extends Struct.CollectionTypeSchema {
-  collectionName: 'workprocesses';
-  info: {
-    displayName: 'workprocess';
-    pluralName: 'workprocesses';
-    singularName: 'workprocess';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    detail: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::workprocess.workprocess'
-    > &
-      Schema.Attribute.Private;
-    processName: Schema.Attribute.String;
-    processno: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    publishedAt: Schema.Attribute.DateTime;
-    sraticicon: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1594,14 +1653,13 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    Inquiry: Schema.Attribute.Relation<'oneToMany', 'api::inquiry.inquiry'>;
+    inquiries: Schema.Attribute.Relation<'oneToMany', 'api::inquiry.inquiry'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
-    orders: Schema.Attribute.Relation<'oneToMany', 'api::order.order'>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1638,24 +1696,26 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::appointment-hero.appointment-hero': ApiAppointmentHeroAppointmentHero;
+      'api::appointment.appointment': ApiAppointmentAppointment;
       'api::blog.blog': ApiBlogBlog;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
+      'api::contact-hero.contact-hero': ApiContactHeroContactHero;
       'api::customer-foodback.customer-foodback': ApiCustomerFoodbackCustomerFoodback;
+      'api::dashboard-hero.dashboard-hero': ApiDashboardHeroDashboardHero;
       'api::hero-spot.hero-spot': ApiHeroSpotHeroSpot;
       'api::inquiry.inquiry': ApiInquiryInquiry;
       'api::invoice.invoice': ApiInvoiceInvoice;
+      'api::message.message': ApiMessageMessage;
       'api::order.order': ApiOrderOrder;
-      'api::partner.partner': ApiPartnerPartner;
       'api::post.post': ApiPostPost;
       'api::product.product': ApiProductProduct;
       'api::querie.querie': ApiQuerieQuerie;
       'api::review.review': ApiReviewReview;
-      'api::scrolling-text.scrolling-text': ApiScrollingTextScrollingText;
       'api::service-category.service-category': ApiServiceCategoryServiceCategory;
       'api::service-detail.service-detail': ApiServiceDetailServiceDetail;
+      'api::service-hero-spot.service-hero-spot': ApiServiceHeroSpotServiceHeroSpot;
       'api::testomonial.testomonial': ApiTestomonialTestomonial;
-      'api::theme.theme': ApiThemeTheme;
-      'api::workprocess.workprocess': ApiWorkprocessWorkprocess;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

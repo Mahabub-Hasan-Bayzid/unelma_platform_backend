@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "scrolling_texts",
+  "info": {
+    "singularName": "scrolling-text",
+    "pluralName": "scrolling-texts",
+    "displayName": "ScrollingText"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  }
+}

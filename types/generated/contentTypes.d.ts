@@ -825,7 +825,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
     detail: Schema.Attribute.Blocks;
     images: Schema.Attribute.Media<'images' | 'files', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -909,6 +909,35 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
     product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     rating: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiScrollingTextScrollingText
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'scrolling_texts';
+  info: {
+    displayName: 'ScrollingText';
+    pluralName: 'scrolling-texts';
+    singularName: 'scrolling-text';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::scrolling-text.scrolling-text'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    text: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1018,6 +1047,43 @@ export interface ApiTestomonialTestomonial extends Struct.CollectionTypeSchema {
     >;
     publishedAt: Schema.Attribute.DateTime;
     stockholder: Schema.Attribute.Enumeration<['customer', 'partner']>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiThemeTheme extends Struct.CollectionTypeSchema {
+  collectionName: 'themes';
+  info: {
+    displayName: 'theme';
+    pluralName: 'themes';
+    singularName: 'theme';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    backgroundcolor: Schema.Attribute.String;
+    bordershad: Schema.Attribute.String;
+    card1: Schema.Attribute.String;
+    card2: Schema.Attribute.String;
+    card3: Schema.Attribute.String;
+    componentBackcolor1: Schema.Attribute.String;
+    componentBackcolor2: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    fontcolor1: Schema.Attribute.String;
+    fontcolor2: Schema.Attribute.String;
+    heroBackImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    hubarColor1: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::theme.theme'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1584,9 +1650,11 @@ declare module '@strapi/strapi' {
       'api::product.product': ApiProductProduct;
       'api::querie.querie': ApiQuerieQuerie;
       'api::review.review': ApiReviewReview;
+      'api::scrolling-text.scrolling-text': ApiScrollingTextScrollingText;
       'api::service-category.service-category': ApiServiceCategoryServiceCategory;
       'api::service-detail.service-detail': ApiServiceDetailServiceDetail;
       'api::testomonial.testomonial': ApiTestomonialTestomonial;
+      'api::theme.theme': ApiThemeTheme;
       'api::workprocess.workprocess': ApiWorkprocessWorkprocess;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

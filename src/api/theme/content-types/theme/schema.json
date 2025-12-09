@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "themes",
+  "info": {
+    "singularName": "theme",
+    "pluralName": "themes",
+    "displayName": "theme"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "backgroundcolor": {
+      "type": "string"
+    },
+    "componentBackcolor1": {
+      "type": "string"
+    },
+    "componentBackcolor2": {
+      "type": "string"
+    },
+    "fontcolor1": {
+      "type": "string"
+    },
+    "fontcolor2": {
+      "type": "string"
+    },
+    "hubarColor1": {
+      "type": "string"
+    },
+    "bordershad": {
+      "type": "string"
+    },
+    "card1": {
+      "type": "string"
+    },
+    "card2": {
+      "type": "string"
+    },
+    "card3": {
+      "type": "string"
+    },
+    "heroBackImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

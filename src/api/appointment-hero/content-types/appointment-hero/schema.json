@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "appointment_heroes",
+  "info": {
+    "singularName": "appointment-hero",
+    "pluralName": "appointment-heroes",
+    "displayName": "AppointmentHero"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "AppointmentHeroImage": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

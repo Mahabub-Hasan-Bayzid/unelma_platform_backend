@@ -62,6 +62,32 @@
     },
     "statment": {
       "type": "string"
+    },
+    "missionImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "vissionImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "strengthtext": {
+      "type": "text"
+    },
+    "grothText": {
+      "type": "text"
     }
   }
 }

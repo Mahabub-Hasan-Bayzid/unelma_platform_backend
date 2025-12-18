@@ -47,6 +47,21 @@
     },
     "featured": {
       "type": "boolean"
+    },
+    "likes": {
+      "type": "integer"
+    },
+    "views": {
+      "type": "integer"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "AI",
+        "Tech",
+        "Design",
+        "Newsletter"
+      ]
     }
   }
 }

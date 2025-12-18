@@ -479,6 +479,42 @@ export interface ApiAboutAbout extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiApplicationApplication extends Struct.CollectionTypeSchema {
+  collectionName: 'applications';
+  info: {
+    displayName: 'Application';
+    pluralName: 'applications';
+    singularName: 'application';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aboutYourself: Schema.Attribute.Text;
+    applicantEmail: Schema.Attribute.String;
+    applicantName: Schema.Attribute.String;
+    coverLetter: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    job_postings: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::job-posting.job-posting'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::application.application'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    resume: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiAppointmentHeroAppointmentHero
   extends Struct.CollectionTypeSchema {
   collectionName: 'appointment_heroes';
@@ -563,6 +599,9 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   };
   attributes: {
     blog: Schema.Attribute.Relation<'oneToOne', 'api::blog.blog'>;
+    category: Schema.Attribute.Enumeration<
+      ['AI', 'Tech', 'Design', 'Newsletter']
+    >;
     content: Schema.Attribute.Blocks;
     cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
@@ -570,6 +609,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     excerpt: Schema.Attribute.String;
     featured: Schema.Attribute.Boolean;
+    likes: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
       Schema.Attribute.Private;
@@ -581,6 +621,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    views: Schema.Attribute.Integer;
   };
 }
 
@@ -630,6 +671,36 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     result: Schema.Attribute.Blocks;
     topImage: Schema.Attribute.Media<'images' | 'files', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
+  collectionName: 'categories';
+  info: {
+    displayName: 'Category';
+    pluralName: 'categories';
+    singularName: 'category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category.category'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    order: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -807,6 +878,50 @@ export interface ApiInvoiceInvoice extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     total: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiJobPostingJobPosting extends Struct.CollectionTypeSchema {
+  collectionName: 'job_postings';
+  info: {
+    displayName: 'Job Posting';
+    pluralName: 'job-postings';
+    singularName: 'job-posting';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    applications: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::application.application'
+    >;
+    category: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    deadline: Schema.Attribute.DateTime;
+    description: Schema.Attribute.Blocks;
+    experienceLevel: Schema.Attribute.Enumeration<['mid', 'senior', 'junior']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'junior'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::job-posting.job-posting'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.Text;
+    type: Schema.Attribute.Enumeration<
+      ['full-time', 'part-time', 'internship']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'full-time'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1779,15 +1894,18 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::application.application': ApiApplicationApplication;
       'api::appointment-hero.appointment-hero': ApiAppointmentHeroAppointmentHero;
       'api::appointment.appointment': ApiAppointmentAppointment;
       'api::blog.blog': ApiBlogBlog;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
+      'api::category.category': ApiCategoryCategory;
       'api::contact-hero.contact-hero': ApiContactHeroContactHero;
       'api::customer-foodback.customer-foodback': ApiCustomerFoodbackCustomerFoodback;
       'api::hero-spot.hero-spot': ApiHeroSpotHeroSpot;
       'api::inquiry.inquiry': ApiInquiryInquiry;
       'api::invoice.invoice': ApiInvoiceInvoice;
+      'api::job-posting.job-posting': ApiJobPostingJobPosting;
       'api::message.message': ApiMessageMessage;
       'api::order.order': ApiOrderOrder;
       'api::partner.partner': ApiPartnerPartner;

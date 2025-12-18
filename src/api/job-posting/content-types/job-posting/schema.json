@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_postings",
+  "info": {
+    "singularName": "job-posting",
+    "pluralName": "job-postings",
+    "displayName": "Job Posting"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "text"
+    },
+    "location": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "required": true,
+      "default": "full-time",
+      "enum": [
+        "full-time",
+        "part-time",
+        "internship"
+      ]
+    },
+    "deadline": {
+      "type": "datetime"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "experienceLevel": {
+      "type": "enumeration",
+      "required": true,
+      "default": "junior",
+      "enum": [
+        "mid",
+        "senior",
+        "junior"
+      ]
+    },
+    "category": {
+      "type": "string"
+    },
+    "applications": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::application.application",
+      "mappedBy": "job_postings"
+    }
+  }
+}
